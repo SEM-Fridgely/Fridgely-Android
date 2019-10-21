@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
         JSONParser jsonParser = new JSONParser();
         try {
             recipes.addAll(jsonParser.getRecipiesFromUrl(jsonParser.readUrl("https://api.edamam.com/search?q=egg&app_id=3ef87764&app_key=f6329aeb0ce6a806b529977877a9b5a4%20&from=0&to=10&calories=700-800&diet=low-fat")));
-
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
