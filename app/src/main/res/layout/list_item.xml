@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/imgLinearLayout"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/preview"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:src="@mipmap/ic_launcher" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/titleLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recipe name" />
+
+        <LinearLayout
+            android:id="@+id/textLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RatingBar
+                android:id="@+id/rating"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:clickable="false"
+                android:max="5"
+                android:rating="4"/>
+
+            <TextView
+                android:id="@+id/raterNum"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="num"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"/>
+
+            <TextView
+                android:id="@+id/calorie"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                android:text="num" />
+            <TextView
+                android:id="@+id/calorieUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text=" Cal" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
