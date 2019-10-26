@@ -9,7 +9,7 @@
         android:id="@+id/nav_shoppinglist"
         android:name="cmu.sem.fridgely.ui.shoppinglist.ShoppinglistFragment"
         android:label="@string/menu_shopping_list"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_shoppinglist" />
 
     <fragment
         android:id="@+id/nav_recipes"
@@ -21,11 +21,11 @@
         android:id="@+id/nav_trends"
         android:name="cmu.sem.fridgely.ui.trends.TrendsFragment"
         android:label="@string/menu_trends"
-        tools:layout="@layout/fragment_share" />
+        tools:layout="@layout/fragment_trends" />
 
     <fragment
         android:id="@+id/nav_settings"
         android:name="cmu.sem.fridgely.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
-        tools:layout="@layout/fragment_tools" />
+        tools:layout="@layout/fragment_settings" />
 </navigation>
