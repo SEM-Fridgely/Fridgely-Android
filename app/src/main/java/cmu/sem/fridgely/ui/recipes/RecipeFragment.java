@@ -29,6 +29,7 @@ public class RecipeFragment extends Fragment {
                 ViewModelProviders.of(this).get(RecipeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_recipe, container, false);
         listView = root.findViewById(R.id.listView);
+        // TODO: Change to adapter and hide api info
         String testlink = "https://api.edamam.com/search?q=egg&app_id=3ef87764&app_key=f6329aeb0ce6a806b529977877a9b5a4%20&from=0&to=10&calories=700-800&diet=low-fat";
         new StartAsyncTask().execute(testlink);
 

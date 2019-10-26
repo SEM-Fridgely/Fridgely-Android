@@ -1,6 +1,7 @@
 package cmu.sem.fridgely.adapter;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -17,24 +20,10 @@ import java.util.Random;
 
 import cmu.sem.fridgely.R;
 import cmu.sem.fridgely.object.Recipe;
+import cmu.sem.fridgely.ui.recipes.RecipeDetail;
 
 public class RecipeAdapter extends ArrayAdapter<Recipe> implements View.OnClickListener {
-    private ArrayList<Recipe> dataSet;
-//    Context mContext;
-//
-//    private static class ViewHolder{
-//        TextView name;
-//        TextView calorie;
-//        RatingBar ratings;
-//        TextView raterNum;
-//        ImageView preview;
-//    }
-//
-//    public RecipeAdapter(ArrayList<Recipe> data, Context context){
-//        super(context, R.layout.activity_main, data);
-//        this.dataSet = data;
-//        this.mContext=context;
-//    }
+    private int lastPosition = -1;
 
     public RecipeAdapter(Activity context, ArrayList<Recipe> recipes){
         super(context, 0, recipes);
@@ -42,54 +31,11 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> implements View.OnClickL
 
     @Override
     public void onClick(View v){
+        RecipeDetail recipeDetail = new RecipeDetail();
+        Bundle bundle = new Bundle();
 
+        recipeDetail.setArguments(bundle);
     }
-
-    private int lastPosition = -1;
-
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        // Get the data item for this position
-//        Recipe recipe = getItem(position);
-//        // Check if an existing view is being reused, otherwise inflate the view
-//        ViewHolder viewHolder; // view lookup cache stored in tag
-//
-//        final View result;
-//
-//        if (convertView == null) {
-//
-//            viewHolder = new ViewHolder();
-//            LayoutInflater inflater = LayoutInflater.from(getContext());
-//            convertView = inflater.inflate(R.layout.list_item, parent, false);
-//            viewHolder.name = (TextView) convertView.findViewById(R.id.name);
-//            viewHolder.calorie = (TextView) convertView.findViewById(R.id.calorie);
-//            viewHolder.ratings = (RatingBar) convertView.findViewById(R.id.rating);
-//            viewHolder.raterNum = (TextView) convertView.findViewById(R.id.raterNum);
-//            viewHolder.preview = (ImageView) convertView.findViewById(R.id.preview);
-//
-//            result=convertView;
-//
-//            convertView.setTag(viewHolder);
-//        } else {
-//            viewHolder = (ViewHolder) convertView.getTag();
-//            result=convertView;
-//        }
-//
-//        Animation animation = AnimationUtils.loadAnimation(mContext, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
-//        result.startAnimation(animation);
-//        lastPosition = position;
-//
-//        viewHolder.name.setText(recipe.getLabel());
-//        viewHolder.calorie.setText(recipe.getCalories());
-//        viewHolder.ratings.setRating(recipe.getRating());
-//        viewHolder.raterNum.setText(recipe.getRaterNum());
-//        viewHolder.name.setOnClickListener(this);
-//        Glide.with(convertView).load(recipe.getImage().get(0)).into(viewHolder.preview);
-//        viewHolder.preview.setOnClickListener(this);
-//        viewHolder.preview.setTag(position);
-//        // Return the completed view to render on screen
-//        return convertView;
-//    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -108,13 +54,6 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> implements View.OnClickL
         // Random ratings
         Random random = new Random();
         ratings.setRating(random.nextInt(5));
-        //ratings.setRating(currentRecipe.getRating());
-//        originTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                t2s.speak(originTextView.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
-//            }
-//        });
 
         final TextView calorie = listedItemsView.findViewById(R.id.calorie);
         calorie.setText(currentRecipe.getCalories().split("\\.")[0]);

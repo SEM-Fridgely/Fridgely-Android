@@ -1,11 +1,25 @@
 package cmu.sem.fridgely.task;
 
-import android.os.AsyncTask;
+import java.util.List;
+import java.util.ArrayList;
 
-public class RecipeParsingAction extends AsyncTask {
-    @Override
-    protected Object doInBackground(Object[] objects) {
+public class RecipeParsingAction {
 
-        return null;
+    // Plain link with query only
+    public RecipeParsingAction(String q){
+
     }
+
+    public RecipeParsingAction(){
+
+    }
+
+    public String getQueryUrl(String q, List<String> dietLabel, List<String> healthLabel, String cuisineType, int minCal, int maxCal){
+        String url = "";
+
+
+
+        return url;
+    }
+
 }
