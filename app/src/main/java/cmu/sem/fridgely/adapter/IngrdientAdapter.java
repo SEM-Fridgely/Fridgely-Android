@@ -17,7 +17,6 @@ public class IngrdientAdapter extends ArrayAdapter<String> {
 
     public IngrdientAdapter(Context context, int resource, ArrayList<String> ingredients) {
         super(context, resource, ingredients);
-//        this.resourceLayout = resource;
         this.mContext = context;
     }
 

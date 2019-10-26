@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import java.util.ArrayList;
@@ -17,11 +19,13 @@ import cmu.sem.fridgely.R;
 import cmu.sem.fridgely.adapter.RecipeAdapter;
 import cmu.sem.fridgely.object.Recipe;
 import cmu.sem.fridgely.parser.JSONParser;
+import cmu.sem.fridgely.ui.UIUtils;
 
 public class RecipeFragment extends Fragment {
 
     private RecipeViewModel recipeViewModel;
     private ListView listView;
+    private ArrayList<Recipe> recipeList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,6 +59,20 @@ public class RecipeFragment extends Fragment {
             super.onPostExecute(recipes);
             RecipeAdapter recipeAdapter = new RecipeAdapter(getActivity(), recipes);
             listView.setAdapter(recipeAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Recipe recipe = (Recipe) listView.getAdapter().getItem(position);
+                    System.out.println("Selected "+position+"th item, named "+recipe.getLabel()+
+                                        ", size "+recipe.getYield()+", calorie "+recipe.getCalories());
+                    RecipeDetail recipeDetail = new RecipeDetail();
+                    recipeDetail.setRecipe(recipe);
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.nav_host_fragment, recipeDetail);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            });
         }
     }
 }
