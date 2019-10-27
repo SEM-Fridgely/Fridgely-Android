@@ -65,7 +65,7 @@ public class Recipe {
     }
 
     public String getCalories() {
-        return calories.split("\\.")[0] + "." + calories.split("\\.")[1].substring(0,2);
+        return calories;
     }
 
     public void setCalories(String calories) {

@@ -18,8 +18,7 @@ import java.util.ArrayList;
 import cmu.sem.fridgely.R;
 import cmu.sem.fridgely.adapter.RecipeAdapter;
 import cmu.sem.fridgely.object.Recipe;
-import cmu.sem.fridgely.parser.JSONParser;
-import cmu.sem.fridgely.ui.UIUtils;
+import cmu.sem.fridgely.util.JSONParser;
 
 public class RecipeFragment extends Fragment {
 

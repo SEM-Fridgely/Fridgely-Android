@@ -1,4 +1,4 @@
-package cmu.sem.fridgely.parser;
+package cmu.sem.fridgely.util;
 
 import android.util.Log;
 
@@ -24,6 +24,7 @@ public class JSONParser {
         ArrayList<Recipe> recipes = new ArrayList<>();
         for(hit h : queryResults.hits){
             System.out.println("Found one record:"+h.recipe.getLabel());
+            h.recipe.setCalories(Formatter.castCaloriesToTwoDecimals(h.recipe.getCalories()));
             recipes.add(h.recipe);
         }
         return recipes;

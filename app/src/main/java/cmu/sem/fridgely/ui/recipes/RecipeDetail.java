@@ -22,10 +22,14 @@ import com.bumptech.glide.request.RequestOptions;
 
 import org.w3c.dom.Text;
 
+import java.text.Normalizer;
+
+import cmu.sem.fridgely.MainActivity;
 import cmu.sem.fridgely.R;
 import cmu.sem.fridgely.adapter.IngrdientAdapter;
 import cmu.sem.fridgely.object.Recipe;
 import cmu.sem.fridgely.ui.UIUtils;
+import cmu.sem.fridgely.util.Formatter;
 
 public class RecipeDetail extends Fragment {
     private Recipe r;
@@ -37,6 +41,8 @@ public class RecipeDetail extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Recipe view does not require floating button
+        ((MainActivity)getActivity()).hideFloatingActionButton();
 
         View root = inflater.inflate(R.layout.recipe_detail_layout, container, false);
         final ImageView recipePreviewImage = root.findViewById(R.id.recipe_preview_image);
@@ -52,7 +58,7 @@ public class RecipeDetail extends Fragment {
         final TextView serveSize = root.findViewById(R.id.serving_number);
         serveSize.setText(r.getYield()+"");
         final TextView calories = root.findViewById(R.id.calorie_number);
-        calories.setText(r.getCalories());
+        calories.setText(Formatter.castCaloriesToTwoDecimals(r.getCalories()));
         final ListView ingredientList = root.findViewById(R.id.ingredient_list);
 
         IngrdientAdapter ingrdientAdapter = new IngrdientAdapter(root.getContext(), 0, r.getIngredientLines());
