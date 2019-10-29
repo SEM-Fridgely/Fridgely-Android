@@ -25,6 +25,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 
+import cmu.sem.fridgely.ui.shoppinglist.AddItemDialog;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -40,8 +42,9 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                new AddItemDialog().show(getSupportFragmentManager(), "add item");
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+////                        .setAction("Action", null).show();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -108,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void hideFloatingActionButton(){
         fab.hide();
-//        fab.setVisibility(View.GONE);
     }
 
 }
