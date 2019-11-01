@@ -40,7 +40,7 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> implements View.OnClickL
 
         currentRecipe = getItem(position);
 
-        final TextView labelTextView = listedItemsView.findViewById(R.id.name);
+        final TextView labelTextView = listedItemsView.findViewById(R.id.shop_item_name);
         labelTextView.setText(currentRecipe.getLabel());
 
         final RatingBar ratings = listedItemsView.findViewById(R.id.rating);

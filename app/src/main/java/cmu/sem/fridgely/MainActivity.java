@@ -1,11 +1,12 @@
 package cmu.sem.fridgely;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
@@ -17,6 +18,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -25,6 +27,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 
+import java.util.ArrayList;
+
+import cmu.sem.fridgely.object.ShoppingListItem;
 import cmu.sem.fridgely.ui.shoppinglist.AddItemDialog;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new AddItemDialog().show(getSupportFragmentManager(), "add item");
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-////                        .setAction("Action", null).show();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -64,30 +67,23 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.INTERNET)
                 != PackageManager.PERMISSION_GRANTED) {
-
-            // Permission is not granted
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.INTERNET)) {
                 System.out.println("not getting request!");
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
             } else {
                 System.out.println("Try to approve permission");
                 // No explanation needed; request the permission
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.INTERNET},
                         PackageManager.PERMISSION_GRANTED);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
             }
         } else {
             // Permission has already been granted
             System.out.println("Permission granted!!");
         }
+
+        // Load sample data
+        loadTestData();
     }
 
     @Override
@@ -111,6 +107,22 @@ public class MainActivity extends AppCompatActivity {
 
     public void hideFloatingActionButton(){
         fab.hide();
+    }
+
+    public void loadTestData(){
+        // Initialize shared preference
+        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Create sample datasets
+        ArrayList<ShoppingListItem> items = new ArrayList<>();
+        items.add(new ShoppingListItem("Eggs", 5.0));
+        items.add(new ShoppingListItem("Chicken breast", 10.0));
+
+        Gson gson = new Gson();
+
+        editor.putString("shoppinglist", gson.toJson(items));
+        editor.commit();
     }
 
 }

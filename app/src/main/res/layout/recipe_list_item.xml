@@ -25,7 +25,7 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/shop_item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Recipe name" />
