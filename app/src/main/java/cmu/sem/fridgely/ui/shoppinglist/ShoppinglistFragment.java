@@ -42,7 +42,7 @@ public class ShoppinglistFragment extends Fragment {
                 ViewModelProviders.of(this).get(ShoppinglistViewModel.class);
         View root = inflater.inflate(R.layout.fragment_shoppinglist, container, false);
 
-        final RecyclerView recyclerView = root.findViewById(R.id.shopping_list_view);
+        /*final RecyclerView recyclerView = root.findViewById(R.id.shopping_list_view);
 
         items = new ArrayList<>();
         SharedPreferences sharedPreferences = ((MainActivity)getActivity()).getPreferences(Context.MODE_PRIVATE);
@@ -55,7 +55,7 @@ public class ShoppinglistFragment extends Fragment {
 
         // Set adapter
         shoppingListAdapter = new ShoppingListAdapter(items);
-        recyclerView.setAdapter(shoppingListAdapter);
+        recyclerView.setAdapter(shoppingListAdapter);*/
 
         return root;
     }

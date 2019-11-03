@@ -8,6 +8,9 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Html;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +51,10 @@ public class RecipeDetail extends Fragment {
         final ImageView recipePreviewImage = root.findViewById(R.id.recipe_preview_image);
         Glide.with(getActivity()).load(r.getImage()).into(recipePreviewImage);
         final TextView recipeTitle = root.findViewById(R.id.recipeTitle);
-        recipeTitle.setText(r.getLabel());
+        String recipeUrl = "<a href=\""+r.getUrl()+"\">"+r.getLabel()+"</a>";
+        recipeTitle.setText(Html.fromHtml(recipeUrl));
+        recipeTitle.setMovementMethod(LinkMovementMethod.getInstance());
+        //TODO: rating bar edit dialog
         final RatingBar ratings = root.findViewById(R.id.rating);
         ratings.setRating(r.getRating());
         final TextView ratingNum = root.findViewById(R.id.ratingNum);
