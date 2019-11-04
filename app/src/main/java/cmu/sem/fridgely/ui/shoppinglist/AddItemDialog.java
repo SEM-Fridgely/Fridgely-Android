@@ -11,8 +11,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -38,30 +36,37 @@ public class AddItemDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dismiss();
-                        ShoppingListItem item = new ShoppingListItem(itemTitle.getText().toString(), Double.parseDouble(itemQuant.getText().toString()));
-                        System.out.println(itemTitle.getText().toString()+", "+itemQuant.getText().toString());
-                        // Call fragment
-//                        ShoppinglistFragment shoppinglistFragment = (ShoppinglistFragment) ((MainActivity)getActivity()).getSupportFragmentManager().findFragmentById(R.id.nav_shoppinglist);
-//                        if(shoppinglistFragment!=null){
-//                            shoppinglistFragment.insertNewItem(item);
-//                        }
-                        // Add to shared preference
-                        SharedPreferences sharedPreferences = ((MainActivity)getActivity()).getPreferences(Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        String oldJsonString = sharedPreferences.getString("shoppinglist", "");
-                        ArrayList<ShoppingListItem> items = new Gson().fromJson(oldJsonString, new TypeToken<ArrayList<ShoppingListItem>>(){}.getType());
-                        items.add(item);
-                        // Save edit to sharedpreferences
-                        editor.putString("shoppinglist", new Gson().toJson(items));
-                        editor.commit();
-                        // Refresh list
+                        if(itemTitle.getText().toString().equals("")){
 
-//                        FragmentManager fragmentManager = ((MainActivity)getActivity()).getSupportFragmentManager();
-//                        ShoppinglistFragment shoppinglistFragment = (ShoppinglistFragment) fragmentManagergetChildFragmentManager().getFragments().get(0);
-//                        shoppinglistFragment.insertNewItem();
+                        }else{
+                            ShoppingListItem item = new ShoppingListItem(itemTitle.getText().toString(), Double.parseDouble(itemQuant.getText().toString()));
+                            System.out.println(itemTitle.getText().toString()+", "+itemQuant.getText().toString());
+                            // Call fragment
+                            ShoppinglistFragment shoppinglistFragment = (ShoppinglistFragment) getFragmentManager().findFragmentByTag("shoplistfrag");
+                            if(shoppinglistFragment!=null){
+                                System.out.println("got!!!");
+                            }
+//                            else{
+//                                System.out.println("fragments size="+getFragmentManager().getFragments().size());
+//                                System.out.println(getFragmentManager().getFragments().get(0).getId());
+//                            }
+//                            ShoppinglistFragment shoppinglistFragment = (ShoppinglistFragment) getFragmentManager().getFragments().get(1);
+                            shoppinglistFragment.insertNewItem(item);
+
+//                            // Add to shared preference
+//                            //TODO: Check duplication while adding items
+//                            SharedPreferences sharedPreferences = ((MainActivity)getActivity()).getPreferences(Context.MODE_PRIVATE);
+//                            SharedPreferences.Editor editor = sharedPreferences.edit();
+//                            String oldJsonString = sharedPreferences.getString("shoppinglist", "");
+//                            ArrayList<ShoppingListItem> items = new Gson().fromJson(oldJsonString, new TypeToken<ArrayList<ShoppingListItem>>(){}.getType());
+//                            items.add(item);
+//                            // Save edit to sharedpreferences
+//                            editor.putString("shoppinglist", new Gson().toJson(items));
+//                            editor.commit();
+                        }
                     }
                 })
-                .setNegativeButton(R.string.item_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.universal_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         getDialog().cancel();

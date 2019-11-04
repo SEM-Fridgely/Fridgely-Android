@@ -19,7 +19,9 @@
     <string name="menu_settings">Settings</string>
 
     <string name="item_add">Add</string>
-    <string name="item_cancel">Cancel</string>
+
+    <string name="universal_cancel">Cancel</string>
+    <string name="universal_submit">Submit</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

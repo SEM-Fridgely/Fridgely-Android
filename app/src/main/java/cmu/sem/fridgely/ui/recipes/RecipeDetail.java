@@ -12,6 +12,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -54,9 +55,15 @@ public class RecipeDetail extends Fragment {
         String recipeUrl = "<a href=\""+r.getUrl()+"\">"+r.getLabel()+"</a>";
         recipeTitle.setText(Html.fromHtml(recipeUrl));
         recipeTitle.setMovementMethod(LinkMovementMethod.getInstance());
-        //TODO: rating bar edit dialog
         final RatingBar ratings = root.findViewById(R.id.rating);
         ratings.setRating(r.getRating());
+        ratings.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                new RateDialog(r.getRating()).show(getFragmentManager(), "raterecipefrag");
+                return true;
+            }
+        });
         final TextView ratingNum = root.findViewById(R.id.ratingNum);
         // TODO: handle while rating is null
 //        ratingNum.setText(r.getRaterNum());
