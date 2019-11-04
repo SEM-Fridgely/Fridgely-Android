@@ -104,6 +104,13 @@ public class MainActivity extends AppCompatActivity
                                 .replace(R.id.nav_host_fragment, settingsFragment, "settingsfrag")
                                 .commit();
                         break;
+                    case R.id.nav_recipes_search:
+                        SeaRecipeFragment seaRecipeFragment = new SeaRecipeFragment();
+                        getSupportFragmentManager().beginTransaction()
+                                .addToBackStack("searchrecipefrag")
+                                .replace(R.id.nav_host_fragment, seaRecipeFragment, "searchrecipefrag")
+                                .commit();
+                        break;
                 }
                 return true;
             }
