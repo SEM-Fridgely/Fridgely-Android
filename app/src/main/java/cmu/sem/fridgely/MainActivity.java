@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -18,6 +19,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -40,11 +42,13 @@ import cmu.sem.fridgely.object.Recipe;
 import cmu.sem.fridgely.object.ShoppingListItem;
 import cmu.sem.fridgely.ui.recipes.RecipeFragment;
 import cmu.sem.fridgely.ui.settings.SettingsFragment;
+import cmu.sem.fridgely.ui.searecipes.SeaRecipeFragment;
 import cmu.sem.fridgely.ui.shoppinglist.AddItemDialog;
 import cmu.sem.fridgely.ui.shoppinglist.ShoppinglistFragment;
 import cmu.sem.fridgely.ui.trends.TrendsFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements SeaRecipeFragment.OnFragmentInteractionListener {
 
 //    private AppBarConfiguration mAppBarConfiguration;
     private FloatingActionButton fab;
@@ -194,5 +198,8 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Permission granted!!");
         }
     }
-
+    @Override
+    public void onFragmentInteraction(Uri uri){
+        //you can leave it empty
+    }
 }
