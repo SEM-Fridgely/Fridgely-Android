@@ -19,15 +19,19 @@
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_settings" />
+            android:title="Settings" />
+        <item
+            android:id="@+id/nav_recipes_search"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Search for Recipe" />
     </group>
 
     <item android:title="Communicate">
         <menu>
-            <item
-                android:id="@+id/nav_trends"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
+<!--            <item-->
+<!--                android:id="@+id/nav_trends"-->
+<!--                android:icon="@drawable/ic_menu_share"-->
+<!--                android:title="@string/menu_share" />-->
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"

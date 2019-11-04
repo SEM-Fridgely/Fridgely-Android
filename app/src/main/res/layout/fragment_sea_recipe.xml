@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.searecipes.SeaRecipeFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:layout_weight="0.3"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/txt_browse"
+                android:layout_width="145dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:editable="false"
+                android:ems="10"
+                android:enabled="true"
+                android:inputType="text"
+                android:text="    Browse"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <SearchView
+                android:id="@+id/search_view"
+                android:layout_width="299dp"
+                android:layout_height="60dp"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:iconifiedByDefault="false"
+                android:inputType="text"></SearchView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/cuisine"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cuisine_1"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Breakfast"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/cuisine_2"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Indian"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/cuisine_3"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Chinese"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/cuisine_4"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Korean"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/cuisine_5"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Italian"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/cuisine_6"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="More +"
+                android:textAllCaps="false" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

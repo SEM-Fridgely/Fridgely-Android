@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.view.View;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,9 +32,11 @@ import android.view.Menu;
 import java.util.ArrayList;
 
 import cmu.sem.fridgely.object.ShoppingListItem;
+import cmu.sem.fridgely.ui.searecipes.SeaRecipeFragment;
 import cmu.sem.fridgely.ui.shoppinglist.AddItemDialog;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements SeaRecipeFragment.OnFragmentInteractionListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private FloatingActionButton fab;
@@ -124,5 +128,8 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("shoppinglist", gson.toJson(items));
         editor.commit();
     }
-
+    @Override
+    public void onFragmentInteraction(Uri uri){
+        //you can leave it empty
+    }
 }
