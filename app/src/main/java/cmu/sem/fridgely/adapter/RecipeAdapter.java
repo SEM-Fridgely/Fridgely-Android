@@ -13,21 +13,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import cmu.sem.fridgely.R;
 import cmu.sem.fridgely.object.Recipe;
 
-public class RecipeAdapter extends ArrayAdapter<Recipe> implements View.OnClickListener {
+public class RecipeAdapter extends ArrayAdapter<Recipe>  {
     private Recipe currentRecipe;
 
     public RecipeAdapter(Activity context, ArrayList<Recipe> recipes){
         super(context, 0, recipes);
-    }
-
-    @Override
-    public void onClick(View v){
-
     }
 
     @Override
@@ -44,16 +38,15 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> implements View.OnClickL
         labelTextView.setText(currentRecipe.getLabel());
 
         final RatingBar ratings = listedItemsView.findViewById(R.id.rating);
-        // Random ratings
-        Random random = new Random();
-        ratings.setRating(random.nextInt(5));
+        if(currentRecipe.getRating()==0) ratings.setRating(5);
+        else ratings.setRating(currentRecipe.getRating());
 
         final TextView calorie = listedItemsView.findViewById(R.id.calorie);
         calorie.setText(currentRecipe.getCalories());
 
         final TextView raterNum = listedItemsView.findViewById(R.id.raterNum);
         //raterNum.setText(currentRecipe.getRaterNum()+"");
-        raterNum.setText(random.nextInt(500)+"");
+        raterNum.setText(currentRecipe.getRaterNum());
 
         final ImageView preview = listedItemsView.findViewById(R.id.preview);
         Glide.with(listedItemsView).load(currentRecipe.getImage()).apply(RequestOptions.circleCropTransform()).into(preview);

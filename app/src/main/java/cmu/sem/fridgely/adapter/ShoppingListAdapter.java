@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,7 +43,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     @NonNull
     @Override
     public ShoppingListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.shopping_list_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.shopping_list_item_2, parent, false);
         ShoppingListViewHolder shoppingListViewHolder = new ShoppingListViewHolder(v);
         return shoppingListViewHolder;
     }

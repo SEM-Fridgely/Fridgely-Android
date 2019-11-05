@@ -19,6 +19,7 @@ import cmu.sem.fridgely.MainActivity;
 import cmu.sem.fridgely.R;
 import cmu.sem.fridgely.adapter.RecipeAdapter;
 import cmu.sem.fridgely.object.Recipe;
+import cmu.sem.fridgely.ui.searecipes.BuildSearchString;
 import cmu.sem.fridgely.util.JSONParser;
 
 public class RecipeFragment extends Fragment {
@@ -26,6 +27,12 @@ public class RecipeFragment extends Fragment {
     private RecipeViewModel recipeViewModel;
     private ListView listView;
     private ArrayList<Recipe> recipeList;
+    private String query;
+
+    public RecipeFragment(String query) {
+        System.out.println("[RecipeFragment] Got string "+query);
+        this.query = query;
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,12 +41,16 @@ public class RecipeFragment extends Fragment {
         ((MainActivity)getActivity()).hideFloatingActionButton();
         View root = inflater.inflate(R.layout.fragment_recipe, container, false);
         listView = root.findViewById(R.id.listView);
-        // TODO: Change to adapter and hide api info
-        String testlink = "https://api.edamam.com/search?q=steak&app_id=3ef87764&app_key=f6329aeb0ce6a806b529977877a9b5a4%20&from=0&to=10&calories=700-800&diet=low-fat";
-        new StartAsyncTask().execute(testlink);
+
+        // Build url based on query request
+        String queryUrl = new BuildSearchString(this.query).getUrl();
+        System.out.println("[RecipeFragment] Url built! "+queryUrl);
+        new StartAsyncTask().execute(queryUrl);
 
         return root;
     }
+
+
 
     // Params: String(url), Void, ArrayList<Recipe>
     public class StartAsyncTask extends AsyncTask<String, Void, ArrayList<Recipe>>{
@@ -48,6 +59,7 @@ public class RecipeFragment extends Fragment {
             ArrayList<Recipe> recipes = new ArrayList<>();
             JSONParser jsonParser = new JSONParser();
             try {
+                System.out.println("[RecipeFragment] JSON "+strings[0]);
                 recipes.addAll(jsonParser.getRecipiesFromUrl(jsonParser.readUrl(strings[0])));
             }catch(Exception ex){
                 System.out.println("Error merging recipes into list: "+ex);

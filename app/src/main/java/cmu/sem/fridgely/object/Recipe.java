@@ -10,8 +10,8 @@ public class Recipe {
     ArrayList<String> tags;
     int yield;// Serving Size
     String calories;
-    float rating;
-    int raterNum;
+    float rating = 5;
+    int raterNum = 0;
     ArrayList<String> ingredientLines;
     ArrayList<DietLabels> dietLabels;
     ArrayList<HealthLabels> healthLabels;

@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/nav_recipes"
-        android:name="cmu.sem.fridgely.ui.recipes.RecipeFragment"
+        android:name="cmu.sem.fridgely.ui.searecipes.SeaRecipeFragment"
         android:label="@string/menu_recipes"
-        tools:layout="@layout/fragment_recipe" />
+        tools:layout="@layout/fragment_sea_recipe" />
 
     <fragment
         android:id="@+id/nav_trends"
@@ -28,10 +28,4 @@
         android:name="cmu.sem.fridgely.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
-
-    <fragment
-        android:id="@+id/nav_recipes_search"
-        android:name="cmu.sem.fridgely.ui.searecipes.SeaRecipeFragment"
-        android:label="Recipe Search"
-        tools:layout="@layout/fragment_sea_recipe" />
 </navigation>

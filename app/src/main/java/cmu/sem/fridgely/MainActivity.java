@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.view.MenuItem;
@@ -35,6 +37,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -52,11 +57,15 @@ public class MainActivity extends AppCompatActivity
 
 //    private AppBarConfiguration mAppBarConfiguration;
     private FloatingActionButton fab;
+    private String USERNAME = "Robert Capa";//TODO: replace with dynamic value
+    private String USERMAIL = "";//TODO: replace with dynamic value
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //TODO: Account validation handle - must be logged in to reach here
 
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -67,8 +76,18 @@ public class MainActivity extends AppCompatActivity
                 new AddItemDialog().show(getSupportFragmentManager(), "newshopitemfrag");
             }
         });
+
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        // Set up header view with user icon and info
+        ImageView userIcon = navigationView.getHeaderView(0).findViewById(R.id.userIcon);
+        Glide.with(this).load(getResources().getIdentifier("payload_physicist", "drawable", this.getPackageName())).apply(RequestOptions.circleCropTransform()).into(userIcon);
+        TextView userName = navigationView.getHeaderView(0).findViewById(R.id.userName);
+        userName.setText(USERNAME);
+        TextView userNameSub = navigationView.getHeaderView(0).findViewById(R.id.userNameSub);
+        userNameSub.setText(USERMAIL);
+
         // Set up NavigationItemSelectedListener to handle action while switching fragments
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -77,6 +96,7 @@ public class MainActivity extends AppCompatActivity
                 drawer.closeDrawer(GravityCompat.START);
                 switch(menuItem.getItemId()){
                     case R.id.nav_shoppinglist:
+                        fab.show();
                         ShoppinglistFragment shoppinglistFragment = new ShoppinglistFragment();
                         getSupportFragmentManager().beginTransaction()
                                 .addToBackStack("shoplistfrag")
@@ -84,13 +104,15 @@ public class MainActivity extends AppCompatActivity
                                 .commit();
                         break;
                     case R.id.nav_recipes:
-                        RecipeFragment recipeFragment = new RecipeFragment();
+                        fab.hide();
+                        SeaRecipeFragment seaRecipeFragment = new SeaRecipeFragment();
                         getSupportFragmentManager().beginTransaction()
-                                .addToBackStack("recipefrag")
-                                .replace(R.id.nav_host_fragment, recipeFragment, "recipefrag")
+                                .addToBackStack("searchrecipefrag")
+                                .replace(R.id.nav_host_fragment, seaRecipeFragment, "searchrecipefrag")
                                 .commit();
                         break;
                     case R.id.nav_trends:
+                        fab.hide();
                         TrendsFragment trendsFragment = new TrendsFragment();
                         getSupportFragmentManager().beginTransaction()
                                 .addToBackStack("trendsfrag")
@@ -98,23 +120,18 @@ public class MainActivity extends AppCompatActivity
                                 .commit();
                         break;
                     case R.id.nav_settings:
+                        fab.hide();
                         SettingsFragment settingsFragment = new SettingsFragment();
                         getSupportFragmentManager().beginTransaction()
                                 .addToBackStack("settingsfrag")
                                 .replace(R.id.nav_host_fragment, settingsFragment, "settingsfrag")
                                 .commit();
                         break;
-                    case R.id.nav_recipes_search:
-                        SeaRecipeFragment seaRecipeFragment = new SeaRecipeFragment();
-                        getSupportFragmentManager().beginTransaction()
-                                .addToBackStack("searchrecipefrag")
-                                .replace(R.id.nav_host_fragment, seaRecipeFragment, "searchrecipefrag")
-                                .commit();
-                        break;
                 }
                 return true;
             }
         });
+
         // Setup menu toggle button
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -159,7 +176,6 @@ public class MainActivity extends AppCompatActivity
 
     public void showFloatingActionButton(){
         fab.show();
-
     }
 
     public void hideFloatingActionButton(){

@@ -22,6 +22,8 @@
 
     <string name="universal_cancel">Cancel</string>
     <string name="universal_submit">Submit</string>
+    
+    <string name="payload_physicist">https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/cillian-murphy-attends-the-free-fire-closing-night-gala-news-photo-615030208-1551909348.jpg</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +33,8 @@ public class ShoppinglistFragment extends Fragment {
     private ShoppinglistViewModel shoppingListViewModel;
     private ShoppingListAdapter shoppingListAdapter;
     private RecyclerView.LayoutManager layoutManager;
+//    private RecyclerTouchListener recyclerTouchListener;
+    private RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,8 +45,7 @@ public class ShoppinglistFragment extends Fragment {
                 ViewModelProviders.of(this).get(ShoppinglistViewModel.class);
         View root = inflater.inflate(R.layout.fragment_shoppinglist, container, false);
 
-        final RecyclerView recyclerView = root.findViewById(R.id.shopping_list_view);
-        RecyclerTouchListener recyclerTouchListener = new RecyclerTouchListener(getActivity(), recyclerView);
+        recyclerView = root.findViewById(R.id.shopping_list_view);
 
         // Set layout manager
         layoutManager = new LinearLayoutManager(getContext());
@@ -51,9 +53,42 @@ public class ShoppinglistFragment extends Fragment {
         SharedPreferences sharedPreferences = ((MainActivity)getActivity()).getPreferences(Context.MODE_PRIVATE);
         String shoppinglistJson = sharedPreferences.getString("shoppinglist", "");
         ArrayList<ShoppingListItem> items = new Gson().fromJson(shoppinglistJson, new TypeToken<ArrayList<ShoppingListItem>>(){}.getType());
+
         // Set adapter
         shoppingListAdapter = new ShoppingListAdapter(items);
         recyclerView.setAdapter(shoppingListAdapter);
+
+        // Set up enhanced feature
+        SwipeController swipeController = new SwipeController();
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeController);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+//        recyclerTouchListener = new RecyclerTouchListener(((MainActivity) getActivity()), recyclerView);
+//        recyclerTouchListener.setClickable(new RecyclerTouchListener.OnRowClickListener() {
+//            @Override
+//            public void onRowClicked(int position) {
+//                System.out.println("At onRowClicked Row "+(position+1));
+//            }
+//
+//            @Override
+//            public void onIndependentViewClicked(int independentViewID, int position) {
+//                System.out.println("At onIndependentViewClicked Row "+(position+1));
+//            }
+//        }).setSwipeOptionViews(R.id.edit, R.id.change)
+//                .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
+//                    @Override
+//                    public void onSwipeOptionClicked(int viewID, int position) {
+//                        String message = "";
+//                        if (viewID == R.id.edit) {
+//                            message += "Edit";
+//                        } else if (viewID == R.id.change) {
+//                            message += "Change";
+//                        }
+//                        message += " clicked for row " + (position + 1);
+//                        System.out.println("[ShoppinglistFragment]"+message);
+//                    }
+//                });
+        //recyclerView.addOnItemTouchListener(recyclerTouchListener);
+
         // Setup viewmodel data
         shoppingListViewModel.postAllItems(items);
 
@@ -80,4 +115,16 @@ public class ShoppinglistFragment extends Fragment {
     public void insertNewItem(ShoppingListItem newItem){
         shoppingListViewModel.postItems(newItem);
     }
+
+//    @Override
+//    public void onResume(){
+//        super.onResume();
+//        recyclerView.addOnItemTouchListener(recyclerTouchListener);
+//    }
+//
+//    @Override
+//    public void onPause(){
+//        super.onPause();
+//        recyclerView.removeOnItemTouchListener(recyclerTouchListener);
+//    }
 }

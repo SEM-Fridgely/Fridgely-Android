@@ -15,7 +15,9 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import cmu.sem.fridgely.MainActivity;
 import cmu.sem.fridgely.R;
+import cmu.sem.fridgely.ui.recipes.RecipeFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -110,6 +112,13 @@ public class SeaRecipeFragment extends Fragment {
         CharSequence text = "Trying to search for " + query;
         int duration = Toast.LENGTH_SHORT;
         Toast.makeText(context, text, duration).show();
+
+        // Connect to recipe fragment
+        RecipeFragment recipeFragment = new RecipeFragment(query);
+        ((MainActivity)getActivity()).getSupportFragmentManager().beginTransaction()
+            .addToBackStack("recipefrag")
+            .replace(R.id.nav_host_fragment, recipeFragment, "recipefrag")
+            .commit();
     }
 
     private SearchView prepareSearchView(View root) {
