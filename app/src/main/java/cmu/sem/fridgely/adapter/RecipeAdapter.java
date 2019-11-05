@@ -46,7 +46,12 @@ public class RecipeAdapter extends ArrayAdapter<Recipe>  {
 
         final TextView raterNum = listedItemsView.findViewById(R.id.raterNum);
         //raterNum.setText(currentRecipe.getRaterNum()+"");
-        raterNum.setText(currentRecipe.getRaterNum());
+        if(currentRecipe.getRaterNum()==0){
+            // TODO: hide rating bar
+//            ratings.
+            raterNum.setText("");
+        }else
+            raterNum.setText(currentRecipe.getRaterNum()+"");
 
         final ImageView preview = listedItemsView.findViewById(R.id.preview);
         Glide.with(listedItemsView).load(currentRecipe.getImage()).apply(RequestOptions.circleCropTransform()).into(preview);

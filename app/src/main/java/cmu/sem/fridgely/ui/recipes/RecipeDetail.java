@@ -74,6 +74,10 @@ public class RecipeDetail extends Fragment {
         calories.setText(Formatter.castCaloriesToTwoDecimals(r.getCalories()));
         final ListView ingredientList = root.findViewById(R.id.ingredient_list);
 
+        // Set rating
+        final RatingBar ratingBar = root.findViewById(R.id.ratethisrecipe);
+
+
         IngrdientAdapter ingrdientAdapter = new IngrdientAdapter(root.getContext(), 0, r.getIngredientLines());
         ingredientList.setAdapter(ingrdientAdapter);
         UIUtils.setListViewHeightBasedOnItems(ingredientList);

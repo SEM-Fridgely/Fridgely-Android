@@ -6,7 +6,7 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swiperefresh"
+        android:id="@+id/shoppinglistswiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

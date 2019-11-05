@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,6 +36,7 @@ public class ShoppinglistFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
 //    private RecyclerTouchListener recyclerTouchListener;
     private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -62,6 +64,21 @@ public class ShoppinglistFragment extends Fragment {
         SwipeController swipeController = new SwipeController();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeController);
         itemTouchHelper.attachToRecyclerView(recyclerView);
+
+        // Set up swipe refresh layout
+        swipeRefreshLayout = root.findViewById(R.id.shoppinglistswiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                System.out.println("Update shopping list detected!!");
+                ArrayList<ShoppingListItem> items = shoppingListViewModel.getItems().getValue();
+                // Set adapter
+                shoppingListAdapter = new ShoppingListAdapter(items);
+                recyclerView.setAdapter(shoppingListAdapter);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
 //        recyclerTouchListener = new RecyclerTouchListener(((MainActivity) getActivity()), recyclerView);
 //        recyclerTouchListener.setClickable(new RecyclerTouchListener.OnRowClickListener() {
 //            @Override
