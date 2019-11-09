@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
@@ -20,6 +22,8 @@ import java.util.ArrayList;
 import cmu.sem.fridgely.MainActivity;
 import cmu.sem.fridgely.R;
 import cmu.sem.fridgely.object.ShoppingListItem;
+import cmu.sem.fridgely.object.ShoppingListItem_Query;
+import cmu.sem.fridgely.object.ShoppingListItem_Return;
 
 public class AddItemDialog extends DialogFragment {
 
@@ -36,33 +40,21 @@ public class AddItemDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dismiss();
-                        if(itemTitle.getText().toString().equals("")){
+                        if(!itemTitle.getText().toString().equals("") && !itemQuant.getText().toString().equals("")){
+                            ShoppingListItem_Query query = new ShoppingListItem_Query();
+                            query.setName(itemTitle.getText().toString());
+                            query.setQty(itemQuant.getText().toString());
 
-                        }else{
-                            ShoppingListItem item = new ShoppingListItem(itemTitle.getText().toString(), Double.parseDouble(itemQuant.getText().toString()));
                             System.out.println(itemTitle.getText().toString()+", "+itemQuant.getText().toString());
                             // Call fragment
                             ShoppinglistFragment shoppinglistFragment = (ShoppinglistFragment) getFragmentManager().findFragmentByTag("shoplistfrag");
                             if(shoppinglistFragment!=null){
                                 System.out.println("got!!!");
+                                shoppinglistFragment.insertNewItem(query);
                             }
-//                            else{
-//                                System.out.println("fragments size="+getFragmentManager().getFragments().size());
-//                                System.out.println(getFragmentManager().getFragments().get(0).getId());
-//                            }
-//                            ShoppinglistFragment shoppinglistFragment = (ShoppinglistFragment) getFragmentManager().getFragments().get(1);
-                            shoppinglistFragment.insertNewItem(item);
-
-//                            // Add to shared preference
-//                            //TODO: Check duplication while adding items
-//                            SharedPreferences sharedPreferences = ((MainActivity)getActivity()).getPreferences(Context.MODE_PRIVATE);
-//                            SharedPreferences.Editor editor = sharedPreferences.edit();
-//                            String oldJsonString = sharedPreferences.getString("shoppinglist", "");
-//                            ArrayList<ShoppingListItem> items = new Gson().fromJson(oldJsonString, new TypeToken<ArrayList<ShoppingListItem>>(){}.getType());
-//                            items.add(item);
-//                            // Save edit to sharedpreferences
-//                            editor.putString("shoppinglist", new Gson().toJson(items));
-//                            editor.commit();
+                        }else{
+                            Log.d(getTag(), "Got empty input from float action button dialog.");
+                            Toast.makeText(getContext(), "Add item cannot be empty!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })

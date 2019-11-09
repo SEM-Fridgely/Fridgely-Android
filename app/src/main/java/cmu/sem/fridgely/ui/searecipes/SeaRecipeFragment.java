@@ -7,10 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +86,7 @@ public class SeaRecipeFragment extends Fragment {
 
         prepareSearchView(root);
         prepareCuisineView(root);
+
         return root;
     }
 
@@ -122,12 +130,13 @@ public class SeaRecipeFragment extends Fragment {
     }
 
     private SearchView prepareSearchView(View root) {
-        SearchView view = root.findViewById(R.id.search_view);
+        final SearchView searchView = root.findViewById(R.id.search_view);
 
-        view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 doSearch(query);
+                searchView.clearFocus();
                 return true;
             }
 
@@ -136,26 +145,82 @@ public class SeaRecipeFragment extends Fragment {
                 return false;
             }
         });
-        return view;
+        return searchView;
     }
 
     private void prepareCuisineView(View root) {
-        List<Button> btns = new ArrayList<Button>();
-        btns.add((Button) root.findViewById(R.id.cuisine_1));
-        btns.add((Button) root.findViewById(R.id.cuisine_2));
-        btns.add((Button) root.findViewById(R.id.cuisine_3));
-        btns.add((Button) root.findViewById(R.id.cuisine_4));
-        btns.add((Button) root.findViewById(R.id.cuisine_5));
-        btns.add((Button) root.findViewById(R.id.cuisine_6));
-        for (Button btn : btns) {
-            btn.setOnClickListener(new Button.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Button b = (Button) v;
-                    doSearch(b.getText().toString());
-                }
-            });
-        }
+        List<ImageView> btns = new ArrayList<>();
+
+        final ImageView breakfast_btn = root.findViewById(R.id.cuisine_1);
+        final TextView breakfast_title = root.findViewById(R.id.cuisine_1_title);
+        breakfast_title.setText("Breakfast");
+        breakfast_btn.setImageResource(R.drawable.breakfast_bg);
+        breakfast_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doSearch(breakfast_title.getText().toString());
+            }
+        });
+
+        final ImageView indian_btn = root.findViewById(R.id.cuisine_2);
+        final TextView indian_title = root.findViewById(R.id.cuisine_2_title);
+        indian_title.setText("Indian");
+        indian_btn.setImageResource(R.drawable.indian_bg);
+        indian_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doSearch(indian_title.getText().toString());
+            }
+        });
+
+        final ImageView chinese_btn = root.findViewById(R.id.cuisine_3);
+        final TextView chinese_title = root.findViewById(R.id.cuisine_3_title);
+        chinese_title.setText("Chinese");
+        chinese_btn.setImageResource(R.drawable.chinese_bg);
+        chinese_btn.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        chinese_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doSearch(chinese_title.getText().toString());
+            }
+        });
+
+        final ImageView korean_btn = root.findViewById(R.id.cuisine_4);
+        final TextView korean_title = root.findViewById(R.id.cuisine_4_title);
+        korean_title.setText("Korean");
+        korean_btn.setImageResource(R.drawable.korean_bg);
+        korean_btn.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        korean_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doSearch(korean_title.getText().toString());
+            }
+        });
+
+        final ImageView italian_btn = root.findViewById(R.id.cuisine_5);
+        final TextView italian_title = root.findViewById(R.id.cuisine_5_title);
+        italian_title.setText("Italian");
+        italian_btn.setImageResource(R.drawable.italian_bg);
+        italian_btn.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        italian_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doSearch(italian_title.getText().toString());
+            }
+        });
+
+        final ImageView more_btn = root.findViewById(R.id.cuisine_6);
+        final TextView more_title = root.findViewById(R.id.cuisine_6_title);
+        more_title.setText("More+");
+        more_btn.setImageResource(R.drawable.more_bg);
+        more_btn.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        more_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doSearch(more_title.getText().toString());
+            }
+        });
+
     }
 
     /**

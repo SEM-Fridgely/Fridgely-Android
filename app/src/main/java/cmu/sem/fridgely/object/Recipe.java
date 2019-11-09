@@ -15,6 +15,15 @@ public class Recipe {
     ArrayList<String> ingredientLines;
     ArrayList<DietLabels> dietLabels;
     ArrayList<HealthLabels> healthLabels;
+    String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getUri() {
         return uri;

@@ -8,26 +8,32 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
+import cmu.sem.fridgely.object.Data;
 import cmu.sem.fridgely.object.QueryResults;
 import cmu.sem.fridgely.object.Recipe;
+import cmu.sem.fridgely.object.RecipeData;
+import cmu.sem.fridgely.object.User;
 import cmu.sem.fridgely.object.hit;
 
 
 public class JSONParser {
-    private final String APP_ID = "3ef87764";
-    private final String APP_KEY = "f6329aeb0ce6a806b529977877a9b5a4";
 
-    public ArrayList<Recipe> getRecipiesFromUrl(String url){
+    public Data getUserFromUrl(String url){
         Gson gson = new Gson();
-        QueryResults queryResults = gson.fromJson(url, QueryResults.class);
-        ArrayList<Recipe> recipes = new ArrayList<>();
-        for(hit h : queryResults.hits){
-            System.out.println("Found one record:"+h.recipe.getLabel());
-            h.recipe.setCalories(Formatter.castCaloriesToTwoDecimals(h.recipe.getCalories()));
-            recipes.add(h.recipe);
-        }
-        return recipes;
+        User queryResults = gson.fromJson(url, User.class);
+        if(queryResults.equals(null))
+           return null;
+        else
+            return queryResults.getData();
+    }
+
+    public List<Recipe> getRecipiesFromUrl(String url){
+        Gson gson = new Gson();
+        RecipeData recipeData = gson.fromJson(url, RecipeData.class);
+        System.out.println("[evanshwu] "+recipeData.data.get(0).getLabel());
+        return recipeData.data;
     }
 
     public String readUrl(String urlString) throws Exception {

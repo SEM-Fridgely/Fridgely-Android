@@ -32,9 +32,13 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/userNameSub"
+        android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="user name sub" />
+        android:layout_gravity="right"
+        android:text="Sign out"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorRed"/>
 
 </LinearLayout>

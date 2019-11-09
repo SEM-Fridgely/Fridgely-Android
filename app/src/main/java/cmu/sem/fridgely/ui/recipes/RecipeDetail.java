@@ -1,32 +1,20 @@
 package cmu.sem.fridgely.ui.recipes;
 
-import android.content.Context;
-import android.media.Rating;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Html;
-import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-
-import org.w3c.dom.Text;
-
-import java.text.Normalizer;
 
 import cmu.sem.fridgely.MainActivity;
 import cmu.sem.fridgely.R;
@@ -66,17 +54,12 @@ public class RecipeDetail extends Fragment {
         });
         final TextView ratingNum = root.findViewById(R.id.ratingNum);
         // TODO: handle while rating is null
-//        ratingNum.setText(r.getRaterNum());
         ratingNum.setText("500");
         final TextView serveSize = root.findViewById(R.id.serving_number);
         serveSize.setText(r.getYield()+"");
         final TextView calories = root.findViewById(R.id.calorie_number);
         calories.setText(Formatter.castCaloriesToTwoDecimals(r.getCalories()));
         final ListView ingredientList = root.findViewById(R.id.ingredient_list);
-
-        // Set rating
-        final RatingBar ratingBar = root.findViewById(R.id.ratethisrecipe);
-
 
         IngrdientAdapter ingrdientAdapter = new IngrdientAdapter(root.getContext(), 0, r.getIngredientLines());
         ingredientList.setAdapter(ingrdientAdapter);

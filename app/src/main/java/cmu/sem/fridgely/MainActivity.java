@@ -2,6 +2,7 @@ package cmu.sem.fridgely;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import android.os.StrictMode;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -65,6 +67,10 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // !!Danger Zone!!
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         //TODO: Account validation handle - must be logged in to reach here
 
         final Toolbar toolbar = findViewById(R.id.toolbar);
@@ -81,12 +87,29 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         // Set up header view with user icon and info
+        SharedPreferences sharedPreferences = getSharedPreferences("fridgely", Context.MODE_PRIVATE);
         ImageView userIcon = navigationView.getHeaderView(0).findViewById(R.id.userIcon);
-        Glide.with(this).load(getResources().getIdentifier("payload_physicist", "drawable", this.getPackageName())).apply(RequestOptions.circleCropTransform()).into(userIcon);
+        Glide.with(this).load(getResources().getIdentifier("baseline_account_circle_black_48", "drawable", this.getPackageName())).apply(RequestOptions.circleCropTransform()).into(userIcon);
         TextView userName = navigationView.getHeaderView(0).findViewById(R.id.userName);
-        userName.setText(USERNAME);
-        TextView userNameSub = navigationView.getHeaderView(0).findViewById(R.id.userNameSub);
-        userNameSub.setText(USERMAIL);
+        System.out.println("[MainActivity] Get account name="+sharedPreferences.getString("fridgelier", "empty"));
+        userName.setText(sharedPreferences.getString("fridgelier", ""));
+        TextView signout = navigationView.getHeaderView(0).findViewById(R.id.logout);
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Clear shared preference
+                SharedPreferences sharedPreferences = getSharedPreferences("fridgely", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("userId", "empty");
+                editor.putString("fridgelier", "empty");
+                editor.putString("shoppinglistid", "empty");
+                editor.commit();
+                // Navigate to login page
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         // Set up NavigationItemSelectedListener to handle action while switching fragments
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -184,7 +207,7 @@ public class MainActivity extends AppCompatActivity
 
     public void loadTestData(){
         // Initialize shared preference
-        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("fridgely", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         // Check if the data exists

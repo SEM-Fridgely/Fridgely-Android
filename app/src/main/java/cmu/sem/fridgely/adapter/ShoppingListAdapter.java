@@ -14,9 +14,10 @@ import java.util.ArrayList;
 
 import cmu.sem.fridgely.R;
 import cmu.sem.fridgely.object.ShoppingListItem;
+import cmu.sem.fridgely.object.ShoppingListItem_Query;
 
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ShoppingListViewHolder> implements View.OnClickListener {
-    private ArrayList<ShoppingListItem> items;
+    private ArrayList<ShoppingListItem_Query> items;
 
     public static class ShoppingListViewHolder extends RecyclerView.ViewHolder{
         public CheckBox boughtCheckbox;
@@ -25,13 +26,13 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
         public ShoppingListViewHolder(@NonNull View itemView) {
             super(itemView);
-            boughtCheckbox = itemView.findViewById(R.id.bought_checkbox);
-            shopItemName = itemView.findViewById(R.id.shop_item_name);
-            quantityNumber = itemView.findViewById(R.id.quantity_number);
+            boughtCheckbox = itemView.findViewById(R.id.boughtcheckbox);
+            shopItemName = itemView.findViewById(R.id.shopitemname);
+            quantityNumber = itemView.findViewById(R.id.quantitynumber);
         }
     }
 
-    public ShoppingListAdapter(ArrayList<ShoppingListItem> items){
+    public ShoppingListAdapter(ArrayList<ShoppingListItem_Query> items){
         this.items = items;
     }
 
@@ -43,26 +44,27 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     @NonNull
     @Override
     public ShoppingListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.shopping_list_item_2, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.shopping_item_row, parent, false);
         ShoppingListViewHolder shoppingListViewHolder = new ShoppingListViewHolder(v);
         return shoppingListViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ShoppingListViewHolder holder, int position) {
-        holder.shopItemName.setText(items.get(position).getItemTitle());
-        holder.quantityNumber.setText(items.get(position).getQuantity()+"");
+        holder.shopItemName.setText(items.get(position).getName());
+        holder.quantityNumber.setText(items.get(position).getQty()+"");
         holder.boughtCheckbox.setChecked(items.get(position).isBought());
         holder.boughtCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                // TODO: move item to the last one
             }
         });
     }
 
     @Override
     public int getItemCount() {
+        if(items==null) return 0;
         return items.size();
     }
 }

@@ -26,7 +26,6 @@ public class RecipeFragment extends Fragment {
 
     private RecipeViewModel recipeViewModel;
     private ListView listView;
-    private ArrayList<Recipe> recipeList;
     private String query;
 
     public RecipeFragment(String query) {
@@ -49,7 +48,6 @@ public class RecipeFragment extends Fragment {
 
         return root;
     }
-
 
 
     // Params: String(url), Void, ArrayList<Recipe>
