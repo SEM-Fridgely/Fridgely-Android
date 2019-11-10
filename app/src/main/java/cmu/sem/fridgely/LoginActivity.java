@@ -10,9 +10,12 @@ import android.os.StrictMode;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -53,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView loginfail;
     private ProgressBar loginloading;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -70,6 +74,16 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
+        final ImageView loginlogo = findViewById(R.id.login_logo);
+        final Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce);
+        anim.setInterpolator(new BounceInterpolator(1, 10));
+        loginlogo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                loginlogo.startAnimation(anim);
+            }
+        });
 
         loginloading = findViewById(R.id.loginloading);
         loginloading.setVisibility(View.INVISIBLE);

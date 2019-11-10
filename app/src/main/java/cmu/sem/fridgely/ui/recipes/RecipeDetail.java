@@ -1,6 +1,7 @@
 package cmu.sem.fridgely.ui.recipes;
 
 import android.os.Bundle;
+import android.support.v4.app.INotificationSideChannel;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -45,16 +46,17 @@ public class RecipeDetail extends Fragment {
         recipeTitle.setMovementMethod(LinkMovementMethod.getInstance());
         final RatingBar ratings = root.findViewById(R.id.rating);
         ratings.setRating(r.getRating());
-        ratings.setOnTouchListener(new View.OnTouchListener() {
+        ratings.setClickable(true);
+        ratings.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 new RateDialog(r.getRating()).show(getFragmentManager(), "raterecipefrag");
-                return true;
             }
         });
         final TextView ratingNum = root.findViewById(R.id.ratingNum);
         // TODO: handle while rating is null
-        ratingNum.setText("500");
+//        ratingNum.setText("");
+        ratingNum.setVisibility(View.INVISIBLE);
         final TextView serveSize = root.findViewById(R.id.serving_number);
         serveSize.setText(r.getYield()+"");
         final TextView calories = root.findViewById(R.id.calorie_number);

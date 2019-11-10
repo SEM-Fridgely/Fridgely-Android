@@ -53,6 +53,7 @@ import cmu.sem.fridgely.ui.searecipes.SeaRecipeFragment;
 import cmu.sem.fridgely.ui.shoppinglist.AddItemDialog;
 import cmu.sem.fridgely.ui.shoppinglist.ShoppinglistFragment;
 import cmu.sem.fridgely.ui.trends.TrendsFragment;
+import cmu.sem.fridgely.util.TypefaceUtil;
 
 public class MainActivity extends AppCompatActivity
         implements SeaRecipeFragment.OnFragmentInteractionListener {
@@ -66,6 +67,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Set up font family
+        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/Sansita-Regular.ttf"); // font from assets: "assets/fonts/Roboto-Regular.ttf
 
         // !!Danger Zone!!
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -89,7 +93,7 @@ public class MainActivity extends AppCompatActivity
         // Set up header view with user icon and info
         SharedPreferences sharedPreferences = getSharedPreferences("fridgely", Context.MODE_PRIVATE);
         ImageView userIcon = navigationView.getHeaderView(0).findViewById(R.id.userIcon);
-        Glide.with(this).load(getResources().getIdentifier("baseline_account_circle_black_48", "drawable", this.getPackageName())).apply(RequestOptions.circleCropTransform()).into(userIcon);
+        Glide.with(this).load(getResources().getIdentifier("baker", "drawable", this.getPackageName())).apply(RequestOptions.circleCropTransform()).into(userIcon);
         TextView userName = navigationView.getHeaderView(0).findViewById(R.id.userName);
         System.out.println("[MainActivity] Get account name="+sharedPreferences.getString("fridgelier", "empty"));
         userName.setText(sharedPreferences.getString("fridgelier", ""));

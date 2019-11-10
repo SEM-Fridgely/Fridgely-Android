@@ -1,6 +1,7 @@
 package cmu.sem.fridgely.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class RecipeAdapter extends ArrayAdapter<Recipe>  {
         }
 
         final ImageView preview = listedItemsView.findViewById(R.id.preview);
+        Log.e(getClass().getName(), "Load image url="+currentRecipe.getImage());
         Glide.with(listedItemsView).load(currentRecipe.getImage()).apply(RequestOptions.circleCropTransform()).into(preview);
 
         return listedItemsView;

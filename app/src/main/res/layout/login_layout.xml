@@ -6,14 +6,14 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/login_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/payload_physicist" />
+        app:srcCompat="@drawable/app_logo" />
 
     <TextView
         android:id="@+id/email_title"
@@ -24,7 +24,7 @@
         android:layout_marginTop="20dp"
         android:text="Email"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/login_logo" />
 
     <EditText
         android:id="@+id/email_user_input"
