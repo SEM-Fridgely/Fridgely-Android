@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import cmu.sem.fridgely.R;
 
 public class IngrdientAdapter extends ArrayAdapter<String> {
-    private int resourceLayout;
     private Context mContext;
 
     public IngrdientAdapter(Context context, int resource, ArrayList<String> ingredients) {

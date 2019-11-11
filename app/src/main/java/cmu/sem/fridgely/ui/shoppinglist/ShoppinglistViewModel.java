@@ -1,22 +1,11 @@
 package cmu.sem.fridgely.ui.shoppinglist;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import cmu.sem.fridgely.MainActivity;
-import cmu.sem.fridgely.object.Recipe;
-import cmu.sem.fridgely.object.ShoppingListItem;
 import cmu.sem.fridgely.object.ShoppingListItem_Query;
 
 public class ShoppinglistViewModel extends ViewModel {

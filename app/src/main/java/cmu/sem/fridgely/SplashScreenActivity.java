@@ -10,7 +10,6 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         setTheme(R.style.AppTheme_Launcher);
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.splash_screen);
         Intent intent = new Intent(getApplicationContext(),
                 LoginActivity.class);
         startActivity(intent);

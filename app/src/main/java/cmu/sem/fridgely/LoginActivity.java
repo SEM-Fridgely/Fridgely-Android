@@ -1,51 +1,39 @@
 package cmu.sem.fridgely;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.load.data.DataFetcher;
 import com.google.gson.Gson;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import cmu.sem.fridgely.object.Data;
 import cmu.sem.fridgely.object.ShoppingListItem_Query;
 import cmu.sem.fridgely.object.ShoppingListItem_QueryHead;
 import cmu.sem.fridgely.object.ShoppingListItem_Return;
-import cmu.sem.fridgely.object.ShoppingListItem_ReturnHead;
 import cmu.sem.fridgely.object.ShoppingListItem_ReturnHeadCollection;
 import cmu.sem.fridgely.object.User;
 import cmu.sem.fridgely.object.UserLogin;
-import cmu.sem.fridgely.util.HTTPUtil;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText email;
@@ -182,8 +170,6 @@ public class LoginActivity extends AppCompatActivity {
                         fetchShoppingList(getResources().getString(R.string.fetch_shoplist)+"/user/"+user.getData().getId()+"/all",
                                 null);
 
-
-
                     } catch (Exception e) {
                         Log.e(this.getClass().getName(), e.getMessage(), e);
                     }
@@ -196,8 +182,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             };
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(getResources().getString(R.string.fetch_login), object, listener, errorListener);
-
-            //LoginActivity.getInstance().addToRequestQueue(jsonObjectRequest);
             RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
             queue.add(jsonObjectRequest);
         }catch(Exception ex){
@@ -254,8 +238,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             };
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, object, listener, errorListener);
-
-            //LoginActivity.getInstance().addToRequestQueue(jsonObjectRequest);
             RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
             queue.add(jsonObjectRequest);
         }catch(Exception ex){

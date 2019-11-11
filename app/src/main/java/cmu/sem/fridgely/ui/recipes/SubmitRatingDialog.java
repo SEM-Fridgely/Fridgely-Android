@@ -9,9 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
@@ -27,8 +25,6 @@ import org.json.JSONObject;
 
 import cmu.sem.fridgely.R;
 import cmu.sem.fridgely.object.Rating_Query;
-import cmu.sem.fridgely.object.ShoppingListItem_Query;
-import cmu.sem.fridgely.ui.shoppinglist.ShoppinglistFragment;
 
 public class SubmitRatingDialog extends DialogFragment {
 

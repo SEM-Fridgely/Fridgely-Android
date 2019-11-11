@@ -6,14 +6,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.RatingBar;
 
 import androidx.fragment.app.DialogFragment;
 
 import cmu.sem.fridgely.R;
-import cmu.sem.fridgely.object.ShoppingListItem;
-import cmu.sem.fridgely.ui.shoppinglist.ShoppinglistFragment;
 
 public class RateDialog extends DialogFragment {
     private float rating;

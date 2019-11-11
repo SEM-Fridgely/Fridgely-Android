@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import cmu.sem.fridgely.R;
-import cmu.sem.fridgely.object.ShoppingListItem;
 import cmu.sem.fridgely.object.ShoppingListItem_Query;
 
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ShoppingListViewHolder> implements View.OnClickListener {

@@ -2,9 +2,7 @@ package cmu.sem.fridgely.ui.shoppinglist;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,16 +12,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.util.ArrayList;
-
-import cmu.sem.fridgely.MainActivity;
 import cmu.sem.fridgely.R;
-import cmu.sem.fridgely.object.ShoppingListItem;
 import cmu.sem.fridgely.object.ShoppingListItem_Query;
-import cmu.sem.fridgely.object.ShoppingListItem_Return;
 
 public class AddItemDialog extends DialogFragment {
 
