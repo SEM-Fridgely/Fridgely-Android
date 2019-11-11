@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
 
         final ImageView loginlogo = findViewById(R.id.login_logo);
         final Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce);
-        anim.setInterpolator(new BounceInterpolator(1, 10));
+        anim.setInterpolator(new BounceInterpolator(0.5, 15));
         loginlogo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

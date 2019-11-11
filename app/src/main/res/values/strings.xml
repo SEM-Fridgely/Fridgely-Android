@@ -28,6 +28,7 @@
     <string name="fetch_login">http://52.91.24.198:8080/fridgely/users/login</string>
     <string name="fetch_register">http://52.91.24.198:8080/fridgely/users</string>
     <string name="fetch_shoplist">http://52.91.24.198:8080/fridgely/shoppingList</string>
+    <string name="submit_ratings">http://52.91.24.198:8080/fridgely/ratings/user/</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

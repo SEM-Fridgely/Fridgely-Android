@@ -9,7 +9,8 @@ public class Formatter {
         System.out.println("Inside castCaloriesToTwoDecimals "+calories);
         String[] strAry = calories.split("\\.");
         if(strAry.length>1){
-            return strAry[0] + "." + strAry[1].substring(0,2);
+           // return strAry[0] + "." + strAry[1].substring(0,2);
+            return strAry[0];
         }else{
             return strAry[0];
         }

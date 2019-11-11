@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
+
 import java.util.ArrayList;
 
 import cmu.sem.fridgely.MainActivity;
@@ -27,6 +29,7 @@ public class RecipeFragment extends Fragment {
     private RecipeViewModel recipeViewModel;
     private ListView listView;
     private String query;
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     public RecipeFragment(String query) {
         System.out.println("[RecipeFragment] Got string "+query);
@@ -40,6 +43,9 @@ public class RecipeFragment extends Fragment {
         ((MainActivity)getActivity()).hideFloatingActionButton();
         View root = inflater.inflate(R.layout.fragment_recipe, container, false);
         listView = root.findViewById(R.id.listView);
+        shimmerFrameLayout = root.findViewById(R.id.shimmer_recipe_list);
+        shimmerFrameLayout.setVisibility(View.VISIBLE);
+        shimmerFrameLayout.startShimmer();
 
         // Build url based on query request
         String queryUrl = new BuildSearchString(this.query).getUrl();
@@ -68,6 +74,8 @@ public class RecipeFragment extends Fragment {
         @Override
         protected void onPostExecute(ArrayList<Recipe> recipes){
             super.onPostExecute(recipes);
+            shimmerFrameLayout.stopShimmer();
+            shimmerFrameLayout.setVisibility(View.INVISIBLE);
             RecipeAdapter recipeAdapter = new RecipeAdapter(getActivity(), recipes);
             listView.setAdapter(recipeAdapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
