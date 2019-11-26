@@ -4,20 +4,25 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import com.arlib.floatingsearchview.FloatingSearchView;
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cmu.sem.fridgely.MainActivity;
 import cmu.sem.fridgely.R;
+import cmu.sem.fridgely.object.FilterObject;
 import cmu.sem.fridgely.ui.recipes.RecipeFragment;
 
 /**
@@ -80,6 +85,7 @@ public class SeaRecipeFragment extends Fragment {
 
         prepareSearchView(root);
         prepareCuisineView(root);
+        prepareFilterDrawer(root, ((MainActivity)getActivity()).getFilters());
 
         return root;
     }
@@ -109,6 +115,7 @@ public class SeaRecipeFragment extends Fragment {
     }
 
     private void doSearch(String query) {
+        ArrayList<FilterObject> listFilter = ((MainActivity)getActivity()).getFilters();
 
         Context context = getContext();
         CharSequence text = "Trying to search for " + query;
@@ -116,35 +123,58 @@ public class SeaRecipeFragment extends Fragment {
         Toast.makeText(context, text, duration).show();
 
         // Connect to recipe fragment
-        RecipeFragment recipeFragment = new RecipeFragment(query);
+        RecipeFragment recipeFragment = new RecipeFragment(query, listFilter);
         ((MainActivity)getActivity()).getSupportFragmentManager().beginTransaction()
             .addToBackStack("recipefrag")
             .replace(R.id.nav_host_fragment, recipeFragment, "recipefrag")
             .commit();
     }
 
-    private SearchView prepareSearchView(View root) {
-        final SearchView searchView = root.findViewById(R.id.search_view);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+    private FloatingSearchView prepareSearchView(View root) {
+        final FloatingSearchView floatingSearchView = root.findViewById(R.id.search_view);
+        floatingSearchView.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                doSearch(query);
-                searchView.clearFocus();
-                return true;
+            public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
+
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
+            public void onSearchAction(String currentQuery) {
+                doSearch(floatingSearchView.getQuery());
             }
         });
-        return searchView;
+
+        return floatingSearchView;
+//        final SearchView searchView = root.findViewById(R.id.search_view);
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                doSearch(query);
+//                searchView.clearFocus();
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
+//        return searchView;
+    }
+
+    private void prepareFilterDrawer(final View root, final ArrayList<FilterObject> filters){
+        ImageButton filterButton = root.findViewById(R.id.filter_button);
+
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new FilterFragment(filters).show(getActivity().getSupportFragmentManager(), "filterfrag");
+            }
+        });
     }
 
     private void prepareCuisineView(View root) {
-        List<ImageView> btns = new ArrayList<>();
-
         final ImageView breakfast_btn = root.findViewById(R.id.cuisine_1);
         final TextView breakfast_title = root.findViewById(R.id.cuisine_1_title);
         breakfast_title.setText("Breakfast");

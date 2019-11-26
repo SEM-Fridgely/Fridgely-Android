@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.searecipes.SeaRecipeFragment">
@@ -10,19 +15,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <SearchView
+        <com.arlib.floatingsearchview.FloatingSearchView
             android:id="@+id/search_view"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:layout_gravity="right"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:iconifiedByDefault="false"
-            android:inputType="text"
-            android:padding="10dp"
+            app:floatingSearch_dismissOnOutsideTouch="true"
+            app:floatingSearch_leftActionMode="noLeftAction"
+            app:floatingSearch_menu="@menu/main"
+            app:floatingSearch_searchHint="Search...."
+            app:floatingSearch_showSearchKey="true"
+            app:floatingSearch_suggestionsListAnimDuration="250"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></SearchView>
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/filter_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/baseline_filter_list_black_36"
+            android:background="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/search_view"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cuisine_1_card"
@@ -44,9 +62,7 @@
                     android:layout_height="200dp"
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="10dp"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true"/>
+                    android:padding="10dp" />
 
                 <TextView
                     android:id="@+id/cuisine_1_title"
@@ -86,8 +102,7 @@
                     android:layout_height="200dp"
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="10dp"
-                    android:scaleType="centerCrop"/>
+                    android:padding="10dp"/>
 
                 <TextView
                     android:id="@+id/cuisine_2_title"
@@ -111,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cuisine_1_card">
@@ -126,7 +141,7 @@
                     android:layout_height="200dp"
                     android:layout_weight="1"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="10dp"/>
+                    android:padding="10dp" />
 
                 <TextView
                     android:id="@+id/cuisine_3_title"
@@ -149,9 +164,10 @@
             android:id="@+id/cuisine_4_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
             android:foreground="?android:attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/cuisine_3_card"
             app:layout_constraintTop_toBottomOf="@id/cuisine_2_card">
 
@@ -189,7 +205,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cuisine_3_card">
@@ -227,9 +243,10 @@
             android:id="@+id/cuisine_6_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
             android:foreground="?android:attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toRightOf="@id/cuisine_5_card"
             app:layout_constraintTop_toBottomOf="@id/cuisine_4_card">
 
@@ -265,3 +282,5 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

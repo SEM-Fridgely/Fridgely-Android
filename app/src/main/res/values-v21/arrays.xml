@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="diet">
+        <item>Balanced</item>
+        <item>High-Fiber</item>
+        <item>High-Protein</item>
+        <item>Low-Carb</item>
+        <item>Low-Fat</item>
+        <item>Low-Sodium</item>
+    </string-array>
+    <string-array name="health">
+        <item>Dairy-Free</item>
+        <item>Gluten-Free</item>
+        <item>Keto-Friendly</item>
+        <item>Low-Sugar</item>
+        <item>Peanut-Free</item>
+        <item>Vegan</item>
+        <item>Vegetarian</item>
+    </string-array>
+    <string-array name="cuisine">
+        <item>American</item>
+        <item>Asian</item>
+        <item>British</item>
+        <item>Caribbean</item>
+        <item>Chinese</item>
+        <item>French</item>
+        <item>Indian</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Mexican</item>
+    </string-array>
+
+    <string-array name="diet_lowc">
+        <item>balanced</item>
+        <item>high-fiber</item>
+        <item>high-protein</item>
+        <item>low-carb</item>
+        <item>low-fat</item>
+        <item>low-sodium</item>
+    </string-array>
+    <string-array name="health_lowc">
+        <item>dairy-free</item>
+        <item>gluten-free</item>
+        <item>keto-friendly</item>
+        <item>low-sugar</item>
+        <item>peanut-free</item>
+        <item>vegan</item>
+        <item>vegetarian</item>
+    </string-array>
+    <string-array name="cuisine_lowc">
+        <item>american</item>
+        <item>asian</item>
+        <item>british</item>
+        <item>caribbean</item>
+        <item>chinese</item>
+        <item>french</item>
+        <item>indian</item>
+        <item>italian</item>
+        <item>japanese</item>
+        <item>mexican</item>
+    </string-array>
+</resources>

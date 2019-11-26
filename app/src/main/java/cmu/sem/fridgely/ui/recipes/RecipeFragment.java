@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import cmu.sem.fridgely.MainActivity;
 import cmu.sem.fridgely.R;
 import cmu.sem.fridgely.adapter.RecipeAdapter;
+import cmu.sem.fridgely.object.FilterObject;
 import cmu.sem.fridgely.object.Recipe;
 import cmu.sem.fridgely.ui.searecipes.BuildSearchString;
 import cmu.sem.fridgely.util.JSONParser;
@@ -30,10 +31,12 @@ public class RecipeFragment extends Fragment {
     private ListView listView;
     private String query;
     private ShimmerFrameLayout shimmerFrameLayout;
+    private ArrayList<FilterObject> filter;
 
-    public RecipeFragment(String query) {
+    public RecipeFragment(String query, ArrayList<FilterObject> filter) {
         System.out.println("[RecipeFragment] Got string "+query);
         this.query = query;
+        this.filter = filter;
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -48,7 +51,7 @@ public class RecipeFragment extends Fragment {
         shimmerFrameLayout.startShimmer();
 
         // Build url based on query request
-        String queryUrl = new BuildSearchString(this.query).getUrl();
+        String queryUrl = new BuildSearchString(this.query, this.filter).getUrl();
         System.out.println("[RecipeFragment] Url built! "+queryUrl);
         new StartAsyncTask().execute(queryUrl);
 

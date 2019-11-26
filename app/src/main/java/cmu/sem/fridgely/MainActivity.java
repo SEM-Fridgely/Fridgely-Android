@@ -27,11 +27,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import cmu.sem.fridgely.object.ShoppingListItem;
+import cmu.sem.fridgely.object.FilterObject;
 import cmu.sem.fridgely.ui.searecipes.SeaRecipeFragment;
 import cmu.sem.fridgely.ui.settings.SettingsFragment;
 import cmu.sem.fridgely.ui.shoppinglist.AddItemDialog;
@@ -42,10 +42,9 @@ import cmu.sem.fridgely.util.TypefaceUtil;
 public class MainActivity extends AppCompatActivity
         implements SeaRecipeFragment.OnFragmentInteractionListener {
 
-//    private AppBarConfiguration mAppBarConfiguration;
     private FloatingActionButton fab;
-    private String USERNAME = "Robert Capa";//TODO: replace with dynamic value
-    private String USERMAIL = "";//TODO: replace with dynamic value
+    //private MenuItem searching;
+    public ArrayList<FilterObject> filters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +62,7 @@ public class MainActivity extends AppCompatActivity
 
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +108,9 @@ public class MainActivity extends AppCompatActivity
                 switch(menuItem.getItemId()){
                     case R.id.nav_shoppinglist:
                         fab.show();
+                        //searching.setVisible(false);
                         ShoppinglistFragment shoppinglistFragment = new ShoppinglistFragment();
+                        getSupportFragmentManager().popBackStack();
                         getSupportFragmentManager().beginTransaction()
                                 .addToBackStack("shoplistfrag")
                                 .replace(R.id.nav_host_fragment, shoppinglistFragment, "shoplistfrag")
@@ -116,7 +118,9 @@ public class MainActivity extends AppCompatActivity
                         break;
                     case R.id.nav_recipes:
                         fab.hide();
+                        //searching.setVisible(true);
                         SeaRecipeFragment seaRecipeFragment = new SeaRecipeFragment();
+                        getSupportFragmentManager().popBackStack();
                         getSupportFragmentManager().beginTransaction()
                                 .addToBackStack("searchrecipefrag")
                                 .replace(R.id.nav_host_fragment, seaRecipeFragment, "searchrecipefrag")
@@ -124,7 +128,9 @@ public class MainActivity extends AppCompatActivity
                         break;
                     case R.id.nav_trends:
                         fab.hide();
+                        //searching.setVisible(false);
                         TrendsFragment trendsFragment = new TrendsFragment();
+                        getSupportFragmentManager().popBackStack();
                         getSupportFragmentManager().beginTransaction()
                                 .addToBackStack("trendsfrag")
                                 .replace(R.id.nav_host_fragment, trendsFragment, "trendsfrag")
@@ -132,7 +138,9 @@ public class MainActivity extends AppCompatActivity
                         break;
                     case R.id.nav_settings:
                         fab.hide();
+                        //searching.setVisible(false);
                         SettingsFragment settingsFragment = new SettingsFragment();
+                        getSupportFragmentManager().popBackStack();
                         getSupportFragmentManager().beginTransaction()
                                 .addToBackStack("settingsfrag")
                                 .replace(R.id.nav_host_fragment, settingsFragment, "settingsfrag")
@@ -148,11 +156,11 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        // Init search filter
+        filters = new ArrayList<>();
+
         // Toggle permission for network connection
         toggleNetworkSecurity();
-
-        // Load sample data
-        loadTestData();
 
         // Load default home fragment
         getSupportFragmentManager().beginTransaction()
@@ -164,6 +172,9 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        //searching = menu.findItem(R.id.action_search);
+        // Hide toolbar search
+        //searching.setVisible(false);
         return true;
     }
 
@@ -173,25 +184,6 @@ public class MainActivity extends AppCompatActivity
 
     public void hideFloatingActionButton(){
         fab.hide();
-    }
-
-    public void loadTestData(){
-        // Initialize shared preference
-        SharedPreferences sharedPreferences = getSharedPreferences("fridgely", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        // Check if the data exists
-        if(!sharedPreferences.contains("shoppinglist")){
-            // Create sample datasets
-            ArrayList<ShoppingListItem> items = new ArrayList<>();
-            items.add(new ShoppingListItem("Eggs", 5.0));
-            items.add(new ShoppingListItem("Chicken breast", 10.0));
-
-            Gson gson = new Gson();
-
-            editor.putString("shoppinglist", gson.toJson(items));
-            editor.commit();
-        }
     }
 
     public void toggleNetworkSecurity(){
@@ -217,5 +209,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri){
         //you can leave it empty
+    }
+
+    public ArrayList<FilterObject> getFilters() {
+        return filters;
+    }
+
+    public void setFilters(ArrayList<FilterObject> filters) {
+        for(FilterObject filter : filters)
+            System.out.println("Got "+filter.category+"="+filter.filterTitle);
+        this.filters = filters;
     }
 }

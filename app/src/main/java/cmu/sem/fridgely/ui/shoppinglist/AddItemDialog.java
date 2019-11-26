@@ -38,7 +38,7 @@ public class AddItemDialog extends DialogFragment {
                             System.out.println(itemTitle.getText().toString()+", "+itemQuant.getText().toString());
                             // Call fragment
                             ShoppinglistFragment shoppinglistFragment = (ShoppinglistFragment) getFragmentManager().findFragmentByTag("shoplistfrag");
-                            if(shoppinglistFragment!=null){
+                            if(shoppinglistFragment!=null) {
                                 System.out.println("got!!!");
                                 shoppinglistFragment.insertNewItem(query);
                             }

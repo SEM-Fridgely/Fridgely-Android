@@ -12,5 +12,9 @@
     <color name="swipeoption_blue">#3693D0</color>
     <color name="swipeoption_purple">#ff1744</color>
 
+    <color name="selected_color">#f18290</color>
+    <color name="selected_font_color">#000000</color>
+    <color name="deselected_color">#A6C6CD</color>
+    <color name="deselected_font_color">#000000</color>
 
 </resources>
