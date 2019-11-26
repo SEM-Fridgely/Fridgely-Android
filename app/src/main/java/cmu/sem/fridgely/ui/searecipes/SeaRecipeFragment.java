@@ -1,6 +1,8 @@
 package cmu.sem.fridgely.ui.searecipes;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +26,7 @@ import cmu.sem.fridgely.MainActivity;
 import cmu.sem.fridgely.R;
 import cmu.sem.fridgely.object.FilterObject;
 import cmu.sem.fridgely.ui.recipes.RecipeFragment;
+import id.zelory.compressor.Compressor;
 
 /**
  * A simple {@link Fragment} subclass.
