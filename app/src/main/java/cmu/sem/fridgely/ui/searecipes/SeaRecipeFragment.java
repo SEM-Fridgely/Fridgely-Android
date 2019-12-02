@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -181,7 +182,8 @@ public class SeaRecipeFragment extends Fragment {
         final ImageView breakfast_btn = root.findViewById(R.id.cuisine_1);
         final TextView breakfast_title = root.findViewById(R.id.cuisine_1_title);
         breakfast_title.setText("Breakfast");
-        breakfast_btn.setImageResource(R.drawable.breakfast_bg);
+//        breakfast_btn.setImageResource(R.drawable.breakfast_bg);
+        Glide.with(root).load(getResources().getString(R.string.breakfast_img)).into(breakfast_btn);
         breakfast_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,7 +194,8 @@ public class SeaRecipeFragment extends Fragment {
         final ImageView indian_btn = root.findViewById(R.id.cuisine_2);
         final TextView indian_title = root.findViewById(R.id.cuisine_2_title);
         indian_title.setText("Indian");
-        indian_btn.setImageResource(R.drawable.indian_bg);
+//        indian_btn.setImageResource(R.drawable.indian_bg);
+        Glide.with(root).load(getResources().getString(R.string.indian_img)).into(indian_btn);
         indian_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,7 +206,8 @@ public class SeaRecipeFragment extends Fragment {
         final ImageView chinese_btn = root.findViewById(R.id.cuisine_3);
         final TextView chinese_title = root.findViewById(R.id.cuisine_3_title);
         chinese_title.setText("Chinese");
-        chinese_btn.setImageResource(R.drawable.chinese_bg);
+//        chinese_btn.setImageResource(R.drawable.chinese_bg);
+        Glide.with(root).load(getResources().getString(R.string.chinese_img)).into(chinese_btn);
         chinese_btn.setScaleType(ImageView.ScaleType.CENTER_CROP);
         chinese_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,7 +219,8 @@ public class SeaRecipeFragment extends Fragment {
         final ImageView korean_btn = root.findViewById(R.id.cuisine_4);
         final TextView korean_title = root.findViewById(R.id.cuisine_4_title);
         korean_title.setText("Korean");
-        korean_btn.setImageResource(R.drawable.korean_bg);
+//        korean_btn.setImageResource(R.drawable.korean_bg);
+        Glide.with(root).load(getResources().getString(R.string.korean_img)).into(korean_btn);
         korean_btn.setScaleType(ImageView.ScaleType.CENTER_CROP);
         korean_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,7 +232,8 @@ public class SeaRecipeFragment extends Fragment {
         final ImageView italian_btn = root.findViewById(R.id.cuisine_5);
         final TextView italian_title = root.findViewById(R.id.cuisine_5_title);
         italian_title.setText("Italian");
-        italian_btn.setImageResource(R.drawable.italian_bg);
+//        italian_btn.setImageResource(R.drawable.italian_bg);
+        Glide.with(root).load(getResources().getString(R.string.italian_img)).into(italian_btn);
         italian_btn.setScaleType(ImageView.ScaleType.CENTER_CROP);
         italian_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,7 +245,8 @@ public class SeaRecipeFragment extends Fragment {
         final ImageView more_btn = root.findViewById(R.id.cuisine_6);
         final TextView more_title = root.findViewById(R.id.cuisine_6_title);
         more_title.setText("More+");
-        more_btn.setImageResource(R.drawable.more_bg);
+//        more_btn.setImageResource(R.drawable.more_bg);
+        Glide.with(root).load(getResources().getString(R.string.more_img)).into(more_btn);
         more_btn.setScaleType(ImageView.ScaleType.CENTER_CROP);
         more_btn.setOnClickListener(new View.OnClickListener() {
             @Override

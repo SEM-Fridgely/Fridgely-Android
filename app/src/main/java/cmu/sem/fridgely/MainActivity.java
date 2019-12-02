@@ -28,7 +28,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import cmu.sem.fridgely.object.FilterObject;

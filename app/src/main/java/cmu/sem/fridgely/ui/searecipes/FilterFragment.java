@@ -83,7 +83,7 @@ public class FilterFragment extends DialogFragment {
                 filters.remove(new FilterObject("cuisine", cuisine_array[index]));
             }
         });
-
+        checkPreviousChips();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(root);
@@ -103,7 +103,7 @@ public class FilterFragment extends DialogFragment {
                         return;
                     }
                 });
-        checkPreviousChips();
+
         return builder.create();
     }
 
@@ -123,5 +123,9 @@ public class FilterFragment extends DialogFragment {
                 chipCloudCuisine.setSelectedChip(_ca.indexOf(_filter.getFilterTitle()));
             }
         }
+
+        _da = null;
+        _ha = null;
+        _ca = null;
     }
 }
