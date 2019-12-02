@@ -11,6 +11,8 @@
 
         <ImageView
             android:id="@+id/preview"
+            android:padding="5dp"
+            android:layout_gravity="center"
             android:layout_width="88dp"
             android:layout_height="88dp"
             android:src="@mipmap/ic_launcher" />
